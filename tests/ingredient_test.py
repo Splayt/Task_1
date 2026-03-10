@@ -1,7 +1,8 @@
 import pytest
 from praktikum.ingredient import Ingredient
 from praktikum.ingredient_types import INGREDIENT_TYPE_SAUCE, INGREDIENT_TYPE_FILLING
-from tests.data import INGREDIENTS_DATA
+from praktikum.data import INGREDIENTS_DATA
+from tests.conftest import HOT_SAUCE, CUTLET  
 
 
 class TestIngredient:
@@ -32,10 +33,10 @@ class TestIngredient:
         )
         assert ingredient.get_price() == ingredient_data["price"]
 
-    def test_ingredient_sauce_type_constant(self, real_ingredient_hot_sauce):
-        ingredient_type = real_ingredient_hot_sauce.get_type()
+    def test_ingredient_sauce_type_constant(self):
+        ingredient_type = HOT_SAUCE.get_type()
         assert ingredient_type == INGREDIENT_TYPE_SAUCE
 
-    def test_ingredient_filling_type_constant(self, real_ingredient_cutlet):
-        ingredient_type = real_ingredient_cutlet.get_type()
+    def test_ingredient_filling_type_constant(self):
+        ingredient_type = CUTLET.get_type()
         assert ingredient_type == INGREDIENT_TYPE_FILLING

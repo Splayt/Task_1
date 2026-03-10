@@ -1,7 +1,7 @@
 import pytest
 from praktikum.bun import Bun
-from tests.data import BUNS_DATA
-
+from praktikum.data import BUNS_DATA
+from tests.conftest import BLACK_BUN, WHITE_BUN
 
 class TestBun:
     @pytest.mark.parametrize("bun_data", BUNS_DATA)
@@ -14,9 +14,9 @@ class TestBun:
         bun = Bun(bun_data["name"], bun_data["price"])
         assert bun.get_price() == bun_data["price"]
 
-    def test_bun_different_objects_different_memory_addresses(self, real_bun_black, real_bun_white):
-        assert id(real_bun_black) != id(real_bun_white)
+    def test_bun_different_objects_different_memory_addresses(self):
+        assert id(BLACK_BUN) != id(WHITE_BUN)
 
-    def test_bun_get_name_returns_string_type(self, real_bun_black):
-        result = real_bun_black.get_name()
+    def test_bun_get_name_returns_string_type(self):
+        result = BLACK_BUN.get_name()
         assert isinstance(result, str)

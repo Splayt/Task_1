@@ -1,6 +1,6 @@
 import pytest
 from praktikum.burger import Burger
-from tests.data import MOVE_INGREDIENT_DATA, REMOVE_INGREDIENT_DATA
+from praktikum.data import MOVE_INGREDIENT_DATA, REMOVE_INGREDIENT_DATA
 
 
 class TestBurger:
@@ -37,13 +37,28 @@ class TestBurger:
         empty_burger.remove_ingredient(0)
         assert empty_burger.ingredients[0] == mock_ingredient_filling
 
-    @pytest.mark.parametrize("test_data", MOVE_INGREDIENT_DATA)
-    def test_burger_move_ingredient_changes_order(self, empty_burger, mock_ingredient_sauce, 
-                                                 mock_ingredient_filling, test_data):
+    def test_burger_move_ingredient_from_0_to_1(self, empty_burger, mock_ingredient_sauce,
+                                                mock_ingredient_filling):
         empty_burger.add_ingredient(mock_ingredient_sauce)
         empty_burger.add_ingredient(mock_ingredient_filling)
-        empty_burger.move_ingredient(test_data["index"], test_data["new_index"])
-        assert empty_burger.ingredients[0] == mock_ingredient_sauce if test_data["expected_order"][0] == 0 else mock_ingredient_filling
+
+        empty_burger.move_ingredient(0, 1)
+
+        assert empty_burger.ingredients[0] == mock_ingredient_filling
+        assert empty_burger.ingredients[1] == mock_ingredient_sauce
+
+    def test_burger_move_ingredient_from_1_to_0(self, empty_burger, mock_ingredient_sauce,
+                                                mock_ingredient_filling):
+        empty_burger.add_ingredient(mock_ingredient_sauce)
+        empty_burger.add_ingredient(mock_ingredient_filling)
+
+        empty_burger.move_ingredient(1, 0)
+
+        
+        assert empty_burger.ingredients[0] == mock_ingredient_filling
+        assert empty_burger.ingredients[1] == mock_ingredient_sauce
+
+
 
     def test_burger_move_ingredient_same_index_no_change(self, empty_burger, mock_ingredient_sauce, 
                                                         mock_ingredient_filling):

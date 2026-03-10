@@ -6,6 +6,13 @@ from praktikum.ingredient import Ingredient
 from praktikum.ingredient_types import INGREDIENT_TYPE_SAUCE, INGREDIENT_TYPE_FILLING
 
 
+BLACK_BUN = Bun("black bun", 100)
+WHITE_BUN = Bun("white bun", 200)
+RED_BUN = Bun("red bun", 300)
+HOT_SAUCE = Ingredient(INGREDIENT_TYPE_SAUCE, "hot sauce", 100)
+CUTLET = Ingredient(INGREDIENT_TYPE_FILLING, "cutlet", 100)
+
+
 @pytest.fixture
 def mock_bun():
     bun = Mock(spec=Bun)
@@ -30,31 +37,6 @@ def mock_ingredient_filling():
     ingredient.get_name.return_value = "cutlet"
     ingredient.get_price.return_value = 100
     return ingredient
-
-
-@pytest.fixture
-def real_bun_black():
-    return Bun("black bun", 100)
-
-
-@pytest.fixture
-def real_bun_white():
-    return Bun("white bun", 200)
-
-
-@pytest.fixture
-def real_bun_red():
-    return Bun("red bun", 300)
-
-
-@pytest.fixture
-def real_ingredient_hot_sauce():
-    return Ingredient(INGREDIENT_TYPE_SAUCE, "hot sauce", 100)
-
-
-@pytest.fixture
-def real_ingredient_cutlet():
-    return Ingredient(INGREDIENT_TYPE_FILLING, "cutlet", 100)
 
 
 @pytest.fixture
